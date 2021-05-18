@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row" style="padding-top: 50px; text-align: left;">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+                  <input type="file" id="fileUpload" class="form-control-file" (change)="fileChange($event)" placeholder="Upload file" accept=".csv,.xml"><br /><br />
+                  <button type="button" class="btn btn-success" (click)="uploadFile()">Upload</button>
+                </div>
+              </form>
+        </div>
+    </div>
+  <hr />
+    <div class="row" style="margin-top: 50px;">
+      <div class="col-md-6">
+        <div class="form-group">
+        <table>
+          <tbody>
+            <tr>
+              <td width="40"><input type="radio" name="groupFilter" (click)="checkOption1()"></td>
+              <td><input type="text" class="form-control" maxlength="5" [(ngModel)]="Currency" placeholder="Currency" /></td>      
+              <td></td>    
+            </tr>
+            <tr>
+              <td width="40"><input type="radio" name="groupFilter" (click)="checkOption2()"></td>
+              <td><input class="form-control" type="date" value="2019-08-19" [(ngModel)]="StartDate" style="width: 200px;"></td>
+              <td>To</td>
+              <td><input class="form-control" type="date" value="2019-08-19" [(ngModel)]="EndDate" style="width: 200px;"></td>      
+            </tr>
+            <tr>
+              <td width="40"><input type="radio" name="groupFilter" (click)="checkOption3()"></td>
+              <td>
+                <select class="form-control" [(ngModel)]="Status">
+                  <option value="All" selected>All</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Failed">Failed</option>
+                  <option value="Rejected">Rejected</option>
+                  <option value="Finished">Finished</option>
+                  <option value="Done">Done</option>
+              </select>
+              </td>     
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" style="padding-top: 20px; text-align: left; padding-left: 40px;"><button type="submit" class="btn btn-primary mb-2" (click)="getTransaction()">Search</button></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      </div>
+
+      <div class="col-md-6">
+
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-12">
+            <table class="table table-hover" [hidden]="swithtable">
+              <thead>
+                <tr>
+                  <th width="100">Id</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data">
+                  <td width="100">{{item.id}}</td>
+                  <td>{{item.payment}}</td>
+                  <td>{{item.status}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="table table-hover" [hidden]="!swithtable">
+              <thead>
+                <tr>
+                  <th width="100">Id</th>
+                  <th>Error Remark</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-danger" *ngFor="let item of errordata">
+                  <td width="100">{{item.transactionid}}</td>
+                  <td>{{item.remark}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
